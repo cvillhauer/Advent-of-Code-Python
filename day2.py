@@ -13,31 +13,41 @@ INPUT = ARGS.file
 with open(INPUT, 'r') as content_file:
     CONTENT = content_file.read()
 
-SMALLEST = 0
-LARGEST = 0
-CURRENT = ""
+LINES = CONTENT.split('\n')
 CHECKSUM1 = 0
 CHECKSUM2 = 0
-CONTENT = CONTENT + '\n' #Otherwise final character will not be processed!
 
 #PART 1
-for char in CONTENT:
-    if char == '\n' or char == '\t' or char == ' ':
-        if SMALLEST == 0 or int(CURRENT) < SMALLEST:
-            SMALLEST = int(CURRENT)
-        if LARGEST == 0 or int(CURRENT) > LARGEST:
-            LARGEST = int(CURRENT)
-        CURRENT = ""
-        if char == '\n':
-            CHECKSUM1 = CHECKSUM1 + (LARGEST - SMALLEST)
-            SMALLEST = 0
-            LARGEST = 0
-            print("CHECKSUM is now ", CHECKSUM1)
-    else:
-        CURRENT = CURRENT + char
+NUMBERS = []
+SMALLEST = 0
+LARGEST = 0
+for line in LINES:
+    NUMBERS = line.split(' ')
+    if len(NUMBERS) <= 1:
+        NUMBERS = line.split('\t')
+    for number in NUMBERS:
+        number = int(number)
+        if SMALLEST == 0 or number < SMALLEST:
+            SMALLEST = number
+        if LARGEST == 0 or number > LARGEST:
+            LARGEST = number
+    CHECKSUM1 = CHECKSUM1 + (LARGEST - SMALLEST)
+    SMALLEST = 0
+    LARGEST = 0
 
 #PART 2
-
+NUMBERS = []
+for line in LINES:
+    NUMBERS = line.split(' ')
+    if len(NUMBERS) <= 1:
+        NUMBERS = line.split('\t')
+    for number in NUMBERS:
+        number = int(number)
+        for divisor in NUMBERS:
+            divisor = int(divisor)
+            if number % divisor == 0 and number / divisor != 1:
+                CHECKSUM2 = CHECKSUM2 + int((number / divisor))
+                break
 
 
 print(" ")
