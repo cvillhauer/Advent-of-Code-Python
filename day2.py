@@ -1,7 +1,8 @@
 #http://adventofcode.com/2017/day/2
 #For each row, determine the difference between the largest value and the smallest value
 #The checksum is the sum of all of these differences.
-#then
+#Then, for each row, find two numbers that divide evenly.
+#The sum is the result of the division operation.
 
 import argparse
 
