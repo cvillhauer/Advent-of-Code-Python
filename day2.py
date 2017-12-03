@@ -13,15 +13,28 @@ INPUT = ARGS.file
 with open(INPUT, 'r') as content_file:
     CONTENT = content_file.read()
 
-print(INPUT)
-print(CONTENT)
-
+SMALLEST = 0
+LARGEST = 0
+CURRENT = ""
 CHECKSUM1 = 0
 CHECKSUM2 = 0
-
+CONTENT = CONTENT + '\n' #Otherwise final character will not be processed!
 
 #PART 1
-
+for char in CONTENT:
+    if char == '\n' or char == '\t' or char == ' ':
+        if SMALLEST == 0 or int(CURRENT) < SMALLEST:
+            SMALLEST = int(CURRENT)
+        if LARGEST == 0 or int(CURRENT) > LARGEST:
+            LARGEST = int(CURRENT)
+        CURRENT = ""
+        if char == '\n':
+            CHECKSUM1 = CHECKSUM1 + (LARGEST - SMALLEST)
+            SMALLEST = 0
+            LARGEST = 0
+            print("CHECKSUM is now ", CHECKSUM1)
+    else:
+        CURRENT = CURRENT + char
 
 #PART 2
 
